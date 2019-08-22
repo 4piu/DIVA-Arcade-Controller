@@ -24,12 +24,12 @@
 #define PIN_RIGHT_STICK_X_2 A5
 
 // Configurations
-const uint8_t TAP_DELAY = 50;  // ms
+const uint8_t TAP_RELEASE = 50;  // ms
 const uint8_t LED_AMOUNT = 40;
 const uint8_t LED_BRIGHTNESS = 0x0F; // from 0x00 to 0x0F
 const uint8_t SENSOR_AMOUNT = 40;
 const uint8_t MOVE_TOLERANCE = 1;
-const uint8_t EDGE_AREA = 6; //from 0 to SENSOR_AMOUNT
+const uint8_t EDGE_AREA = 6;
 
 enum Gesture {
     NOT_PRESENT, MOVING_LEFT, MOVING_RIGHT, HOLDING, TAPPED
@@ -72,11 +72,11 @@ void loop() {
     // Release LR press
     if (L1_pressed || R1_pressed) {
         uint32_t time_millis = millis();
-        if (L1_pressed && (time_millis - L1_press_time > TAP_DELAY)) {
+        if (L1_pressed && (time_millis - L1_press_time > TAP_RELEASE)) {
             digitalWrite(PIN_L1, LOW);
             L1_pressed = false;
         }
-        if (R1_pressed && (time_millis - R1_press_time > TAP_DELAY)) {
+        if (R1_pressed && (time_millis - R1_press_time > TAP_RELEASE)) {
             digitalWrite(PIN_R1, LOW);
             R1_pressed = false;
         }
